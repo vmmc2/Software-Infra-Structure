@@ -10,7 +10,6 @@ result db '1', 13, 10, 0
 start:
 	xor ax, ax
     xor di, di
-    xor al, al
     mov cl, 0
 	mov dx, ax
     mov es, ax
@@ -65,6 +64,23 @@ print1:
     .done:
         ret
 
+print3:
+    call _endl
+    lodsb; sempre carrega algo do registrador si ou di no registrador al.
+    cmp al, 0
+    je done
+    mov ah, 0eh; interrupcao para imprimir um caractere
+    int 10h
+    jmp print3; volta pra print1 pra imprimir o prox caractere
+
+print4:
+    call _endl
+    cmp al, 0
+    je done
+    mov ah, 0eh
+    int 10h
+    jmp print4
+
 print:
     call _endl
     .ok:
@@ -109,32 +125,22 @@ _endl:
 
 expoente:
     xor si, si
-    lodsb ; ta carregando no registrador al o expoente da potenciacao
-    mov ah, byte[variavel] ; ta carregando no registrador ah a base da potenciacao
-    ;so que agora eu tenho que trocar al com ah
-    ;de tal forma que:
-    ; al == base e ah == expoente
-    mov dl, al
-    mov al, ah
-    mov ah, dl
-    ; al == base e ah == expoente
-    cmp ah, 0
+    call _endl
+    ; Nesse momento, temos que em byte[variavel] está guardado o numero que funcionara como base da exp
+    ; Ao mesmo tempo temos que no registrador al está guardado o numero que funcionara como expoente
+    cmp al, '0'
     je caso0
-    cmp ah, 1
+    cmp al, '1'
     je caso1
-    cmp ah, 1
-    ja casofinal
-    caso0:
-        mov si, result
-        call _endl
-        call print1
-    caso1:
-        call _endl
-        call print1
-    casofinal:
 
-    jmp done
+caso0:
+    mov si, result
+    call print3
 
+caso1:
+    mov al, byte[variavel]
+    call print4
+   
 
 done:
     jmp $
