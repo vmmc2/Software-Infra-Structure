@@ -30,7 +30,6 @@ start2:
     call print1
     xor si, si
     call scanfbase2
-    jmp expoente
 
 ;-------- INICIO DA PUTARIA --------------------------------------------------------------
 ;funcao auxiliar pq tava dando merda com o jump pra start2
@@ -39,7 +38,7 @@ print2:
     .okk:
         lodsb
         cmp cl, 0
-        je done
+        je expoente
         dec cl
         call putchar
     jmp .okk 
