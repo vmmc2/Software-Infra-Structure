@@ -12,13 +12,13 @@ start:
     ;do usuario
     ;o numero ficou salvo no registrador AL como um caractere.
     ;Exemplo: Se eu digitei 3, no registrador AL eu tenho guardado: '3'
-    mov bx, al ; To movendo a base da exponenciacao para o registrador BX
+    mov bl, al ; To movendo a base da exponenciacao para o registrador BX
     call _endl ;pulei uma linha e coloquei o cursor no inicio
     call putchar ;printei o caractere que tava em AL (a base)
     call _endl ;pulei outra linha
     ;---------Passo 2: Ler o numero que vai ser o expoente da potenciacao-------------------------------------
     call getchar
-    mov cx, al; To movendo o expoente da potenciacao para o registrador CX
+    mov cl, al; To movendo o expoente da potenciacao para o registrador CX
     call _endl
     call putchar
     call _endl
@@ -43,10 +43,10 @@ putchar: ; a funcao putchar vai printar o caractere que estiver salvo no registr
 	ret
 
 	
-
-jmp $
-times 510-($-$$) db 0	
-dw 0xaa55	
+done:
+    jmp $
+    times 510-($-$$) db 0	
+    dw 0xaa55	
 ; preenche o resto do setor com zeros 		
 ; coloca a assinatura de boot no final
 ; do setor (x86 : little endian)
