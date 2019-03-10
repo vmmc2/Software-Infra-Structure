@@ -9,6 +9,8 @@ start:
     mov es, ax
     call get_string
     call printstring
+    
+    ; TA DANDO MERDA AQUI
     xor si, si
     xor di, di
     xor ax, ax
@@ -17,6 +19,8 @@ start:
     mov si, di
     call printstring
     call dale
+    
+    ; A PARTIR DAQUI VOLTA A PEGAR LEGAL
     xor si, si
     xor di, di
     xor ax, ax
