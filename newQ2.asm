@@ -10,11 +10,13 @@ start:
     call get_string
     call printstring
     
-    ; TA DANDO MERDA AQUI
     xor si, si
     xor di, di
     xor ax, ax
-    call dale
+    call dale ; funcao q pula linha
+    
+    
+    ; TA DANDO MERDA AQUI
     mov di, word[base]
     mov si, di
     call printstring
