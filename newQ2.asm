@@ -44,9 +44,9 @@ start:
     xor ax, ax
     mov bx, ax
     mov cx, ax
-    mov ax, 1; ERRO: POR ALGUM MOTIVO O VALOR Q EU SETO AQUI N EH ALTERADO
-    pop cx ; no registrador cx estamos guardando o expoente ; cx ta zuado
-    pop bx ; no registrador bx estamos guardando a base ; bx ta ok
+    mov ax, 1
+    pop cx 
+    pop bx 
     add cx, cx
 
     ;testando para ver se o expoente eh 0 ou 1 (casos base)
